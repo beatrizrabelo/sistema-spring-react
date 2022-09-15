@@ -1,14 +1,26 @@
+import axios from 'axios';
 import icon from '../../assets/img/notification-icon.svg';
+import { BASE_URL } from '../../utils/request';
 
 import './styles.css';
 
-function NotificationButton(){
+type Props = {
+    salesId: number;
+}
+
+function handleClick(id: number) {
+    axios(`${BASE_URL}/sales/${id}/notification`)
+        .then(response => {
+            console.log("Sucesso!");
+        })
+}
+
+function NotificationButton({ salesId }: Props) {
     return (
-        <div className="dsmeta-red-btn">
-            <img src={icon} alt="Notificar"/>
+        <div className="dsmeta-red-btn" onClick={() => handleClick(salesId)}>
+            <img src={icon} alt="Notificar" />
         </div>
     )
-  }
-  
-  export default NotificationButton;
-  
+}
+
+export default NotificationButton;
